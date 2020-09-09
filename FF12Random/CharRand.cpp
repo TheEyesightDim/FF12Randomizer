@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CharRand.h"
 
-enum CharacterID
+enum CharacterID: unsigned int
 {
 	vaan,
 	ashe,
@@ -85,7 +85,7 @@ void CharRand::save()
 	union U {
 		unsigned short s;
 		unsigned char c[2];
-	}byte;
+	};
 
 	char * buffer;
 	long size = 40 * 128; //Num chars * data size
@@ -533,7 +533,7 @@ void CharRand::randStats()
 void CharRand::swapCharas()
 {
 	int ids[] = { 0,1,2,3,4,5 };
-	shuffle(begin(ids), end(ids), Helpers::rng);
+	std::shuffle(begin(ids), end(ids), Helpers::rng);
 	vector<CharData> data = vector<CharData>();
 	for (int i = 0; i < 6; i++)
 		data.push_back(charData[i]);
@@ -571,8 +571,10 @@ void CharRand::swapCharas()
 
 		charData[CharacterID::baschGuest2] = charData[CharacterID::basch];
 	}
-	int gids[] = { int(CharacterID::reks), int(CharacterID::vossler1), int(CharacterID::larsa), int(CharacterID::reddas) };
-	shuffle(begin(gids), end(gids), Helpers::rng);
+
+	//gids means Guest IDs
+	unsigned gids[] = { CharacterID::reks, CharacterID::vossler1, CharacterID::larsa, CharacterID::reddas };
+	std::shuffle(begin(gids), end(gids), Helpers::rng);
 
 	vector<CharData> gdata = vector<CharData>();
 	for (int i = 6; i < 17; i++)
@@ -622,8 +624,10 @@ void CharRand::fixLicenses(int charIds[6])
 				hasLicenses[charIds[3]] , hasLicenses[charIds[4]] ,hasLicenses[charIds[5]] };
 			charas = 0;
 			for (int i = 0; i < 6; i++)
-				if (newLicenses[i])
-					charas += pow(2, i);
+				if (newLicenses[i]) {
+					charas += (1 << i);
+					//charas += pow(2, i);
+				}
 			charas += 64;
 			LicenseRand::licenseData[i].startingCharacters = charas;
 		}
