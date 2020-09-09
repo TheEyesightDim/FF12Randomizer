@@ -36,3 +36,6 @@
 /packages
 /FF12Random/Debug
 /FF12Random/Release
+/FF12Random/x64/Debug
+/FF12Random/x64/Release
+/x64/Debug

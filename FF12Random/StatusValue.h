@@ -4,7 +4,8 @@
 #include "FlagGroup.h"
 
 using namespace std;
-enum class Status
+
+enum class Status: unsigned int
 {
 	/*Death = 0x01000000,
 	Stone = 0x02000000,
@@ -88,6 +89,6 @@ public:
 	void addRandomStatus(int* weights);
 	bool hasStatus(Status status);
 	void removeStatus(Status status);
-	static void readFlags(static int* weights, FlagGroup flags);
+	static void readFlags(int* weights, FlagGroup flags);
 };
 

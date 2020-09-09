@@ -136,7 +136,10 @@ string LicenseRename::getSameGroup(vector<int> nums)
 		return "Equipment";
 	}
 
-	return false;
+	//NOTE: Below makes no sense... just aborting instead if conditions fail
+	//return false;
+
+	abort();
 }
 
 bool LicenseRename::allMeetCondition(vector<int> nums, int type, int cond)
@@ -192,7 +195,7 @@ string LicenseRename::getGroup(int a)
 	{
 		if (a >= 4097 && a <= 4113 || a >= 4260 && a <= 4264 || a == 4256 || a == 4257 || a == 4273 || a == 4288 || a == 4290)
 			return "Swords";
-		else if (a >= 4114 && a <= 4120 || a == 4259 || a == 4259 || a == 4262 || a == 4265 || a == 4269 || a == 4289)
+		else if (a >= 4114 && a <= 4120 || a == 4259 || a == 4262 || a == 4265 || a == 4269 || a == 4289)
 			return "Greatswords";
 		else if (a >= 4121 && a <= 4130 || a == 4266)
 			return "Katanas";
